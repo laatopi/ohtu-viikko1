@@ -113,7 +113,7 @@ public class VarastoTest {
     
     @Test
     public void toStringToimii() {
-       Boolean totta = varasto.toString().equals("saldo = 0, vielä tilaa 10");
+       Boolean totta = varasto.toString().equals("saldo = 01, vielä tilaa 10");
         assertTrue(true);
     }
 
