@@ -116,5 +116,6 @@ public class VarastoTest {
        Boolean totta = varasto.toString().equals("saldo = 0, vielä tilaa 10");
         assertTrue(true);
     }
+    // Testikommentti
 
 }
