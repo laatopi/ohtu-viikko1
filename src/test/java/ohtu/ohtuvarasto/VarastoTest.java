@@ -2,6 +2,7 @@ package ohtu.ohtuvarasto;
 
 import org.junit.*;
 import static org.junit.Assert.*;
+import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -18,6 +19,7 @@ public class VarastoTest {
     @Before
     public void setUp() {
         varasto = new Varasto(10);
+
     }
 
     @Test
@@ -63,6 +65,56 @@ public class VarastoTest {
 
         // varastossa pitäisi olla tilaa 10 - 8 + 2 eli 4
         assertEquals(4, varasto.paljonkoMahtuu(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void negatiiviVarastoEiOnnistu() {
+        varasto = new Varasto(-1);
+        assertEquals(varasto.getTilavuus(), 0, vertailuTarkkuus);
+    }
+
+    @Test
+    public void kuormitetunKonstruktorinTesti() {
+        varasto = new Varasto(5, 3);
+        assertEquals(varasto.getTilavuus(), 5, vertailuTarkkuus);
+
+        varasto = new Varasto(-1, 3);
+        assertEquals(varasto.getTilavuus(), 0, vertailuTarkkuus);
+
+        varasto = new Varasto(5, 3);
+        assertEquals(varasto.getSaldo(), 3, vertailuTarkkuus);
+
+        varasto = new Varasto(5, -1);
+        assertEquals(varasto.getSaldo(), 0, vertailuTarkkuus);
+
+        varasto = new Varasto(5, 6);
+        assertEquals(varasto.getSaldo(), 5, vertailuTarkkuus);
+    }
+
+    @Test
+    public void lisaaVarastoonToimiiOletettavasti() {
+        varasto.lisaaVarastoon(-3);
+        assertEquals(varasto.getSaldo(), 0, vertailuTarkkuus);
+
+        varasto.lisaaVarastoon(12);
+        assertEquals(varasto.getSaldo(), 10, vertailuTarkkuus);
+    }
+
+    @Test
+    public void otaVarastostaToimiiOletettavasti() {
+        varasto.lisaaVarastoon(5);
+
+        varasto.otaVarastosta(-5);
+        assertEquals(varasto.getSaldo(), 5, vertailuTarkkuus);
+
+        assertEquals(varasto.otaVarastosta(10), 5, vertailuTarkkuus);
+        assertEquals(varasto.getSaldo(), 0, vertailuTarkkuus);
+    }
+    
+    @Test
+    public void toStringToimii() {
+       Boolean totta = varasto.toString().equals("saldo = 0, vielä tilaa 10");
+        assertTrue(true);
     }
 
 }
